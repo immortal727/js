@@ -8,35 +8,34 @@
 let month = prompt('Введите месяц года');
 month = month.toLowerCase();
 switch (month) {
-    case month = 'декабрь':
-        console.log('Лето'); 
-    case month = 'январь':
+    case 'декабрь':
+        console.log('Зима'); 
+    case 'январь':
         console.log('Зима');
-    case month = 'февраль':
+    case 'февраль':
         console.log('Зима');
         break;
-    case month = 'март':
+    case 'март':
         console.log('Весна');
-    case month = 'апрель':
+    case 'апрель':
         console.log('Весна');
-    case month = 'май':
+    case 'май':
         console.log('Весна');
         break;
-    case month = 'июнь':
+    case 'июнь':
         console.log('Лето');
-    case month = 'июль':
+    case 'июль':
         console.log('Лето');
-    case month = 'август':
+    case 'август':
         console.log('Лето');
         break;
-    case month = 'сентябрь':
+    case 'сентябрь':
         console.log('Осень');
-    case month = 'октбярь':
+    case 'октбярь':
         console.log('Осень');
-    case month = 'ноябрь':
+    case 'ноябрь':
         console.log('Осень');
         break;
-    
     default:
         console.log('Такого месяца не бывает');
 }
