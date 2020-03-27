@@ -10,9 +10,9 @@
 */
 let min = 1;
 let max = 7;
-let random = parseInt(Random(min, max));
+let random = parseInt(random(min, max));
 let number;
-/* console.log('Random = ' + random);*/
+/* console.log('random = ' + random);*/
 
 while (number !== 0) {   
     number = prompt('Введите число от 1 до 7 или введите 0 для выхода.');
@@ -28,6 +28,6 @@ while (number !== 0) {
     } 
 }
 
-function Random(min, max) {
+function random(min, max) {
     return Math.random() * (max - min) + min;
 }
