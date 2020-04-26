@@ -74,35 +74,40 @@ function generateField(Object) {
             let div = document.createElement('div');
             if (arrAtribute.indexOf(arr[i][j]) == 2) {
                 div.setAttribute("prise", 'car');
-                someFunc("car", Object);
+                someFunc("car", Object, div);
+                
             }
             else if (arrAtribute.indexOf(arr[i][j]) == 1) {
                 div.setAttribute("prise", 'book');
-                someFunc("book", Object)
+                someFunc("book", Object, div)
+                
             }
             else if (arrAtribute.indexOf(arr[i][j]) == 0) {
                 div.setAttribute("prise", 'book');
-                someFunc("cat", Object)
+                someFunc("cat", Object, div)
+               
             }
+            
             cell__grid.append(div);
         }
     }
 
-    function someFunc(atribut, Object) {    
-        console.log(`Объект ${Object}`)
-        console.log("Свойство title " + Object[atribut]);
-        console.log(`Атрибут - ${atribut}`);
-
-        if (Object[atribut] === atribut) {
-            let title = document.createElement("h2");
-            title.innerText = Object[atribut];
-            let pic = document.createElement("img");
-            pic.setAttribute("src", Object[atribut].img);
-            div.append(title, pic);
-        }
-        
-    }
+    
 } 
+
+function someFunc(atribut, Object, div) {
+    console.log(`Объект ${Object}`)
+    console.log("Свойство title " + Object[atribut]);
+    console.log(`Атрибут - ${atribut}`);
+
+    //  if (Object[atribut] === atribut) {
+    let title = document.createElement("h2");
+    title.innerText = Object[atribut].title;
+    let pic = document.createElement("img");
+    pic.setAttribute("src", Object[atribut].img);
+    div.append(title, pic);
+    //  }
+}
 
 function randomInteger(min, max) {
     // случайное число от min до (max+1)
