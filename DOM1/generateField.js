@@ -25,7 +25,7 @@ let section = document.querySelector(".GameField");
 const OBJARR = Object.entries(Fields);
 const BOTTON_ARR = document.getElementById('btn');
 
-BOTTON_ARR.addEventListener('click', generateField.bind(Fields));
+BOTTON_ARR.addEventListener('click', generateField.bind(BOTTON_ARR, Fields));
 
 //Создание массива x*x
 let createArray = (n) => {
@@ -74,21 +74,21 @@ function generateField(Object) {
             let div = document.createElement('div');
             if (arrAtribute.indexOf(arr[i][j]) == 2) {
                 div.setAttribute("prise", 'car');
-                someFunc("car");
+                someFunc("car", Object);
             }
             else if (arrAtribute.indexOf(arr[i][j]) == 1) {
                 div.setAttribute("prise", 'book');
-                someFunc("book")
+                someFunc("book", Object)
             }
             else if (arrAtribute.indexOf(arr[i][j]) == 0) {
                 div.setAttribute("prise", 'book');
-                someFunc("cat")
+                someFunc("cat", Object)
             }
             cell__grid.append(div);
         }
     }
 
-    function someFunc(atribut) {    
+    function someFunc(atribut, Object) {    
         console.log(`Объект ${Object}`)
         console.log("Свойство title " + Object[atribut]);
         console.log(`Атрибут - ${atribut}`);
@@ -103,8 +103,6 @@ function generateField(Object) {
         
     }
 } 
-
-
 
 function randomInteger(min, max) {
     // случайное число от min до (max+1)
