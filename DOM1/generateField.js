@@ -87,21 +87,24 @@ function generateField(Object) {
             cell__grid.append(div);
         }
     }
-} 
 
-function someFunc(atribut) {
-    console.log(atribut);
-    for (let item in Object) {
-        console.log(Object[item].title);
-        if (Object[item].title === atribut) { 
+    function someFunc(atribut) {    
+        console.log(`Объект ${Object}`)
+        console.log("Свойство title " + Object[atribut]);
+        console.log(`Атрибут - ${atribut}`);
+
+        if (Object[atribut] === atribut) {
             let title = document.createElement("h2");
-            title.innerText = Object[item].title;
+            title.innerText = Object[atribut];
             let pic = document.createElement("img");
-            pic.setAttribute("src", Object[item].img);
+            pic.setAttribute("src", Object[atribut].img);
             div.append(title, pic);
         }
+        
     }
-}
+} 
+
+
 
 function randomInteger(min, max) {
     // случайное число от min до (max+1)
