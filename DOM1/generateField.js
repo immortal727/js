@@ -19,12 +19,13 @@ let Fields = {
         img: "img/car.jpg",
     }
 }
-const BOTTON_ARR = document.getElementById('btn');
+
 let section = document.querySelector(".GameField");
-BOTTON_ARR.addEventListener('click', generateField.bind(Fields));
 
 const OBJARR = Object.entries(Fields);
+const BOTTON_ARR = document.getElementById('btn');
 
+BOTTON_ARR.addEventListener('click', generateField.bind(Fields));
 
 //Создание массива x*x
 let createArray=(n) => {
@@ -63,7 +64,6 @@ function generateField(Object) {
 
 
     //Оформляем GRID
-
     cell__grid.style.cssText = `
         grid-template-columns: repeat(${count},1fr);
         grid-template-rows:  repeat(${count},1fr);
@@ -72,44 +72,35 @@ function generateField(Object) {
     //Добавляем ячеки
     for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr[i].length; j++) {
-
             let div = document.createElement('div');
-
-            for (let item in Object) {
-                if (arrAtribute.indexOf(arr[i][j]) == 2) {
-                    let title = document.createElement("h2");
-                    title.innerText = Object[item].title;
-                    let pic = document.createElement("img");
-                    pic.setAttribute("src", Object[item].img);
-                    div.setAttribute("prise", "car");
-                    div.append(title, pic);
-                    break;
-                }
-                else if (arrAtribute.indexOf(arr[i][j]) == 1) {
-                    let title = document.createElement("h2");
-                    title.innerText = Object[item].title;
-                    let pic = document.createElement("img");
-                    pic.setAttribute("src", Object[item].img);
-                    div.setAttribute("prise", "book");
-                    div.append(title, pic);
-                    break;
-                }
-                else if (arrAtribute.indexOf(arr[i][j]) == 0) {
-                    let title = document.createElement("h2");
-                    title.innerText = Object[item].title;
-                    let pic = document.createElement("img");
-                    pic.setAttribute("src", Object[item].img);
-                    div.setAttribute("prise", "cat");
-                    div.append(title, pic);
-                    break;
-                }
+            if (arrAtribute.indexOf(arr[i][j]) == 2) {
+                div.setAttribute("prise", 'car');
+                someFunc("car");
             }
-
+            else if (arrAtribute.indexOf(arr[i][j]) == 1) {
+                div.setAttribute("prise", 'book');
+                someFunc("book")
+            }
+            else if (arrAtribute.indexOf(arr[i][j]) == 0) {
+                div.setAttribute("prise", 'book');
+                someFunc("cat")
+            }
             cell__grid.append(div);
         }
     }
-}
+} 
 
+function someFunc(atribut) {
+    for (let item in Object) {
+        if (Object[item].title = atribut) { 
+            let title = document.createElement("h2");
+            title.innerText = Object[item].title;
+            let pic = document.createElement("img");
+            pic.setAttribute("src", Object[item].img);
+            div.append(title, pic);
+        }
+    }
+}
 
 
 
