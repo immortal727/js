@@ -17,14 +17,23 @@ img {
     display: grid;
     grid-gap: 15px;
     grid-auto-flow: dense;
+    margin:20px 0;
 }
+    .GameField > div {
+        min-height:50px;
+        text-align:center;
+        box-shadow:2px 3px 3px #ccc;
+        border:1px solid green;
+        border-radius:7px;
+        padding:5px;
+    }
 
-#field {
-    background: green;
-}
+    #field {
+        background: green;
+    }
 
-.btn {
-    cursor:pointer;
+.button {
+    cursor: pointer;
     line-height: 37px;
     padding: 0 30px;
     display: block;
@@ -53,7 +62,7 @@ img {
     -o-border-radius: 5px;
     border-radius: 5px;
 }
-    .btn:hover {
+    .button:hover {
         background-color: #f8b195;
         background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0%, #f35364), color-stop(100%, #ffb07c));
         background-image: -o-linear-gradient(bottom, #f35364 0%, #ffb07c 100%);
