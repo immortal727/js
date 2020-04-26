@@ -93,7 +93,7 @@ function someFunc(atribut) {
     console.log(atribut);
     for (let item in Object) {
         console.log(Object[item].title);
-        if (Object[item].title === true) { 
+        if (Object[item].title === atribut) { 
             let title = document.createElement("h2");
             title.innerText = Object[item].title;
             let pic = document.createElement("img");
