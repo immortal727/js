@@ -28,7 +28,7 @@ const BOTTON_ARR = document.getElementById('btn');
 BOTTON_ARR.addEventListener('click', generateField.bind(Fields));
 
 //Создание массива x*x
-let createArray=(n) => {
+let createArray = (n) => {
     console.log(Number.isInteger(n));
     if (!Number.isInteger(n)) n = 3; // Если не числовое значение, то значене n=3 (по условию кол-ва ячеек)
     if (n < 3) n = 3;
@@ -62,7 +62,6 @@ function generateField(Object) {
         arrAtribute.push(randomInteger(1, count * count));
     }
 
-
     //Оформляем GRID
     cell__grid.style.cssText = `
         grid-template-columns: repeat(${count},1fr);
@@ -91,8 +90,10 @@ function generateField(Object) {
 } 
 
 function someFunc(atribut) {
+    console.log(atribut);
     for (let item in Object) {
-        if (Object[item].title = atribut) { 
+        console.log(Object[item].title);
+        if (Object[item].title === true) { 
             let title = document.createElement("h2");
             title.innerText = Object[item].title;
             let pic = document.createElement("img");
@@ -102,33 +103,6 @@ function someFunc(atribut) {
     }
 }
 
-
-
-
-/*function generateField(object, section, max) {
-    //let n = randomInteger(3, max);
-    let n = max;
-    section.style.cssText = `
-        grid-template-columns:repeat(${n},1fr);
-        grid-template-rows:repeat(${n},1fr);`
-        ;
-    for (let i = 0; i < max * max; i++) {
-        for (let item in object) {
-            let block = document.createElement("div");
-            let title = document.createElement("h2");
-            title.innerText = object[item].title;
-            let pic = document.createElement("img");
-            pic.setAttribute("src", object[item].img);
-            // В наш блок div добавили заголовок и картинку
-            block.append(title, pic);
-            // Добавили уже в самый верхний блок grid всё его содержимое
-            section.appendChild(block);
-        }
-       // section.appendChild(block)[i];
-    }
-   // section.дочерние_элементы[рандомный_индекс]
-}   */
-
 function randomInteger(min, max) {
     // случайное число от min до (max+1)
     min = Math.ceil(min); // Округление до ближайшего большего целого
@@ -136,6 +110,3 @@ function randomInteger(min, max) {
     let rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
 }
-
-
-//generateField(Fields, section, 5);
