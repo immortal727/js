@@ -78,16 +78,25 @@ generateField(books);
 
 let btnMinusList = document.querySelectorAll('.btnMinus'); 
 let btnPlusList = document.querySelectorAll(".btnPlus");
+let hidden = document.querySelectorAll("hidden");
 //kol = document.getElementsByClassName("hidden");
 //minus.addEventListener('click', Minus.bind(minus, books));
+for (let item in books) {
+    x = 0;
+    btnPlusList[item] = x;
+    x++;
+    console.log(`btnPlusList[${ x }] = ${btnPlusList[x]}`)
+}
+//console.log(btnPlusList);
 
-btnPlusList.forEach(btnPlus => btnPlus.addEventListener('click', () => changeCount(event)));
+btnPlusList.forEach(btnPlus => btnPlus.addEventListener('click', () => changeCount(event, btnPlusList)));
 //arr.forEach(element => console.log(element));
 
-function changeCount(event) {
+function changeCount(event, btnPlusList) {
     event.preventDefault(); // Чтоб не отправлялось на сразу на сервер
-    kol = document.querySelectorAll("hidden");
-    console.log("Кол-во книг ", );
+  //  console.log(btnPlus);
+    kol = hidden[btnPlusList];
+    console.log("Кол-во книг ", kol);
 }
 
 /*minus.onclick = (function (e) {
@@ -95,8 +104,8 @@ function changeCount(event) {
     kol = document.querySelectorAll("hidden");
     console.log("Кол-во книг ", kol);  
 });*/
-/*
-btnPlusList.onclick = (function (e) {
+
+/*btnPlusList.onclick = (function (e) {
     e.preventDefault(); // Чтоб не отправлялось на сразу на сервер
     kol = document.getElementsByClassName("hidden");
     console.log("Кол-во книг ", kol.value);
