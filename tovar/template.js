@@ -64,15 +64,17 @@ function creatElem(item, Object, div) {
 
 generateField(books);
 
-let minus = document.querySelector("btnMinus");
-let plus = document.querySelector("btnPlus");
-minus.addEventListener('click', Minus.bind(minus, books));
+let minus = document.getElementsByClassName("btnMinus")[0];
+let plus = document.getElementsByClassName("btnPlus")[0];
+//minus.addEventListener('click', Minus.bind(minus, books));
 plus.addEventListener('click', Plus.bind(plus, books));
 
-function Minus(Tovar, event) {
-    console.log("event", event);
-    // plus.innerText.Tovar.count
-}
+minus.onclick = (function (e) {
+    e.preventDefault(); // Чтоб не отправлялось на сразу на сервер
+    console.log("event", e);
+    console.log("Кол-во книг ", e.books.count); 
+    console.log(books);
+});
 
 function Plus(Tovar, event) {
     console.log("event", event);
