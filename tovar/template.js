@@ -16,22 +16,28 @@ let books = [
 // Дополнительно: можно ввести количество с клавиатуры
 
 let section = document.querySelector(".tovars");
-let kol_books = books.length;
+let n = books.length;
 let kol_tovars = 0;
+
+let createArray = (n) => {
+    let arr = [];
+    for (let i = 0; i < n; i++) {
+        arr[i] = i;
+    }
+    return arr;
+};
 
 function generateField(Books) {
     let cell__grid = document.getElementsByClassName('tovars')[0]; // Получаем первый элемент
-
+    let arr = createArray(n);
     //Оформляем GRID
     cell__grid.style.cssText = `
-        grid-template-columns: repeat(${kol_books},1fr);
-        grid-template-rows:  repeat(${kol_books},1fr);
+        grid-template-columns: repeat(${n},1fr);
+        grid-template-rows:  repeat(${n},1fr);
    `;
 
-
-
     //Добавляем ячеки
-    for (let i = 0; i < kol_books; i++) {
+    for (let i = 0; i < arr.length; i++) {
         let div = document.createElement('div');
         creatElem(i,Books, div);
         cell__grid.append(div);
@@ -53,36 +59,55 @@ function creatElem(item, Object, div) {
     let hidden = document.createElement("input");
     hidden.setAttribute("value", Object[item].count);
     hidden.setAttribute("type", "hidden");
-    hidden.setAttribute("id", "hidden");
+    hidden.classList.add("hidden");
     let btnMinus = document.createElement("input");
     btnMinus.setAttribute("type", "text");
     btnMinus.setAttribute("readonly", "");
     btnMinus.setAttribute("value", "-");
-    btnMinus.setAttribute("id","btnMinus");
+    btnMinus.classList.add("btnMinus");
     let btnPlus = document.createElement("input");
     btnPlus.setAttribute("type", "text");
     btnPlus.setAttribute("readonly", "");
     btnPlus.setAttribute("value", "+");
-    btnPlus.setAttribute("id", "btnPlus");
+    btnPlus.classList.add("btnPlus");
     counter.append(btnMinus, count, btnPlus);
     div.append(title, author, counter, hidden);
 }
 
 generateField(books);
 
-let minus = document.getElementById("btnMinus");
-let plus = document.getElementById("btnPlus");
+let btnMinusList = document.querySelectorAll('.btnMinus'); 
+let btnPlusList = document.querySelectorAll(".btnPlus");
+//kol = document.getElementsByClassName("hidden");
 //minus.addEventListener('click', Minus.bind(minus, books));
-//plus.addEventListener('click', Plus.bind(plus, books));
 
-minus.onclick = (function (e) {
-    e.preventDefault(); // Чтоб не отправлялось на сразу на сервер
-    kol = document.getElementById("hidden");
-    console.log("Кол-во книг ", kol.value);  
-});
+btnPlusList.forEach(btnPlus => btnPlus.addEventListener('click', () => changeCount(event)));
+//arr.forEach(element => console.log(element));
 
-plus.onclick = (function (e) {
+function changeCount(event) {
+    event.preventDefault(); // Чтоб не отправлялось на сразу на сервер
+    kol = document.querySelectorAll("hidden");
+    console.log("Кол-во книг ", );
+}
+
+/*minus.onclick = (function (e) {
     e.preventDefault(); // Чтоб не отправлялось на сразу на сервер
-    kol = document.getElementById("hidden");
+    kol = document.querySelectorAll("hidden");
+    console.log("Кол-во книг ", kol);  
+});*/
+/*
+btnPlusList.onclick = (function (e) {
+    e.preventDefault(); // Чтоб не отправлялось на сразу на сервер
+    kol = document.getElementsByClassName("hidden");
     console.log("Кол-во книг ", kol.value);
-});
+});*/
+
+
+//btnPlusList.addEventListener('click', Plus.bind(btnPlusList, books));
+/*function Plus(e, books) {
+    e.preventDefault(); // Чтоб не отправлялось на сразу на сервер
+    kol = document.getElementsByClassName("hidden");
+    console.log("Кол-во книг ", kol.value);
+}*/
+
+
