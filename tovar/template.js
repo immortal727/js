@@ -28,6 +28,8 @@ function generateField(Books) {
         grid-template-rows:  repeat(${kol_books},1fr);
    `;
 
+
+
     //Добавляем ячеки
     for (let i = 0; i < kol_books; i++) {
         let div = document.createElement('div');
@@ -48,35 +50,39 @@ function creatElem(item, Object, div) {
     count.setAttribute("type", "number");
     count.setAttribute("value", "0");
     //  count.innerText = Object[item].count;
+    let hidden = document.createElement("input");
+    hidden.setAttribute("value", Object[item].count);
+    hidden.setAttribute("type", "hidden");
+    hidden.setAttribute("id", "hidden");
     let btnMinus = document.createElement("input");
     btnMinus.setAttribute("type", "text");
     btnMinus.setAttribute("readonly", "");
     btnMinus.setAttribute("value", "-");
-    btnMinus.classList.add("btnMinus");
+    btnMinus.setAttribute("id","btnMinus");
     let btnPlus = document.createElement("input");
     btnPlus.setAttribute("type", "text");
     btnPlus.setAttribute("readonly", "");
     btnPlus.setAttribute("value", "+");
-    btnPlus.classList.add("btnPlus");
+    btnPlus.setAttribute("id", "btnPlus");
     counter.append(btnMinus, count, btnPlus);
-    div.append(title, author, counter);
+    div.append(title, author, counter, hidden);
 }
 
 generateField(books);
 
-let minus = document.getElementsByClassName("btnMinus")[0];
-let plus = document.getElementsByClassName("btnPlus")[0];
+let minus = document.getElementById("btnMinus");
+let plus = document.getElementById("btnPlus");
 //minus.addEventListener('click', Minus.bind(minus, books));
-plus.addEventListener('click', Plus.bind(plus, books));
+//plus.addEventListener('click', Plus.bind(plus, books));
 
 minus.onclick = (function (e) {
     e.preventDefault(); // Чтоб не отправлялось на сразу на сервер
-    console.log("event", e);
-    console.log("Кол-во книг ", e.books.count); 
-    console.log(books);
+    kol = document.getElementById("hidden");
+    console.log("Кол-во книг ", kol.value);  
 });
 
-function Plus(Tovar, event) {
-    console.log("event", event);
-   // plus.innerText.Tovar.count
-}
+plus.onclick = (function (e) {
+    e.preventDefault(); // Чтоб не отправлялось на сразу на сервер
+    kol = document.getElementById("hidden");
+    console.log("Кол-во книг ", kol.value);
+});
