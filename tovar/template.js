@@ -18,11 +18,6 @@ let books = [
 let section = document.querySelector(".tovars");
 let kol_books = books.length;
 let kol_tovars = 0;
-let minus = document.querySelector("btnMinus");
-let plus = document.querySelector("btnPlus");
-
-minus.addEventListener('click', Minus.bind(minus, books));
-plus.addEventListener('click', Plus.bind(plus, books));
 
 function generateField(Books) {
     let cell__grid = document.getElementsByClassName('tovars')[0]; // Получаем первый элемент
@@ -41,7 +36,6 @@ function generateField(Books) {
     }
 }
 function creatElem(item, Object, div) {
-    console.log(Object);
     let title = document.createElement("h3");
     title.innerText = Object[item].title;
     let author = document.createElement("cite");
@@ -69,6 +63,16 @@ function creatElem(item, Object, div) {
 }
 
 generateField(books);
+
+let minus = document.querySelector("btnMinus");
+let plus = document.querySelector("btnPlus");
+minus.addEventListener('click', Minus.bind(minus, books));
+plus.addEventListener('click', Plus.bind(plus, books));
+
+function Minus(Tovar, event) {
+    console.log("event", event);
+    // plus.innerText.Tovar.count
+}
 
 function Plus(Tovar, event) {
     console.log("event", event);
