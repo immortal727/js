@@ -29,7 +29,7 @@ let createArray = (n) => {
 
 function generateField(Books) {
     let cell__grid = document.getElementsByClassName('tovars')[0]; // Получаем первый элемент
-    let arr = createArray(n);
+    //let arr = createArray(n);
     //Оформляем GRID
     cell__grid.style.cssText = `
         grid-template-columns: repeat(${n},1fr);
@@ -37,7 +37,7 @@ function generateField(Books) {
    `;
 
     //Добавляем ячеки
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < n; i++) {
         let div = document.createElement('div');
         creatElem(i,Books, div);
         cell__grid.append(div);
@@ -51,7 +51,6 @@ function creatElem(item, Object, div) {
     let counter = document.createElement("div");
     counter.classList.add('counter');
     let count = document.createElement("input");
-    count.setAttribute("type", "text");
     count.classList.add("count");
     count.setAttribute("type", "number");
     count.setAttribute("value", "0");
@@ -70,8 +69,8 @@ function creatElem(item, Object, div) {
     btnPlus.setAttribute("readonly", "");
     btnPlus.setAttribute("value", "+");
     btnPlus.classList.add("btnPlus");
-    counter.append(btnMinus, count, btnPlus);
-    div.append(title, author, counter, hidden);
+    counter.append(btnMinus, count, btnPlus, hidden);
+    div.append(title, author, counter);
 }
 
 generateField(books);
@@ -79,24 +78,33 @@ generateField(books);
 let btnMinusList = document.querySelectorAll('.btnMinus'); 
 let btnPlusList = document.querySelectorAll(".btnPlus");
 let hidden = document.querySelectorAll("hidden");
-//kol = document.getElementsByClassName("hidden");
-//minus.addEventListener('click', Minus.bind(minus, books));
-for (let item in books) {
-    x = 0;
-    btnPlusList[item] = x;
-    x++;
-    console.log(`btnPlusList[${ x }] = ${btnPlusList[x]}`)
+
+btnPlusList.forEach(btnPlus => btnPlus.addEventListener('click', () => changeCountPlus(event)));
+btnMinusList.forEach(btnPlus => btnPlus.addEventListener('click', () => changeCountMinus(event)));
+function changeCountPlus(event) {
+   event.preventDefault(); // Чтоб не отправлялось на сразу на сервер
+   let maxKol = this.event.target.parentElement.children[3].value;
+   let number = this.event.target.parentElement.children[1];
+    
+   console.log("Максимальное кол-во книг ", maxKol);
+    // При клике на плюс прибавляем значение в центральном счетчике товаров
+    // Если превысило допустимое кол-во товаров, то оставляем число макс. кол-вом
+  //  let number = +event.target.parentElement.children[1].number;
+  //  +event.target.parentElement.children[3].value < number 
+
+    +number.value >= +maxKol ? number.value = maxKol : number.value++;
+    console.log(`Счетчик товаров ${number.value}`)
 }
-//console.log(btnPlusList);
 
-btnPlusList.forEach(btnPlus => btnPlus.addEventListener('click', () => changeCount(event, btnPlusList)));
-//arr.forEach(element => console.log(element));
-
-function changeCount(event, btnPlusList) {
+function changeCountMinus(event) {
     event.preventDefault(); // Чтоб не отправлялось на сразу на сервер
-  //  console.log(btnPlus);
-    kol = hidden[btnPlusList];
-    console.log("Кол-во книг ", kol);
+    let number = event.target.parentElement.children[1];
+    
+
+    // При клике на минус удаляем по одному значению в центральном счетчике товаров
+    // Если <0 оставляем 0
+    number.value <= 0 ? number.value = 0 : number.value--;
+    console.log(`Счетчик товаров ${number.value}`)
 }
 
 /*minus.onclick = (function (e) {
