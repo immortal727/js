@@ -82,7 +82,7 @@ let btnCountList = document.querySelectorAll('.count');
 
 btnPlusList.forEach(btnPlus => btnPlus.addEventListener('click', () => changeCountPlus(event)));
 btnMinusList.forEach(btnPlus => btnPlus.addEventListener('click', () => changeCountMinus(event)));
-btnCountList.forEach(count => count.addEventListener('change', () => changeCount(event)));
+btnCountList.forEach(count => count.addEventListener('input', () => changeCount(event)));
 
 function changeCountPlus(event) {
    event.preventDefault(); // Чтоб не отправлялось на сразу на сервер
