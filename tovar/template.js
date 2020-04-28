@@ -77,54 +77,43 @@ generateField(books);
 
 let btnMinusList = document.querySelectorAll('.btnMinus'); 
 let btnPlusList = document.querySelectorAll(".btnPlus");
-let hidden = document.querySelectorAll("hidden");
+let hidden = document.querySelectorAll(".hidden");
+let btnCountList = document.querySelectorAll('.count');
 
 btnPlusList.forEach(btnPlus => btnPlus.addEventListener('click', () => changeCountPlus(event)));
 btnMinusList.forEach(btnPlus => btnPlus.addEventListener('click', () => changeCountMinus(event)));
+btnCountList.forEach(count => count.addEventListener('change', () => changeCount(event)));
+
 function changeCountPlus(event) {
    event.preventDefault(); // Чтоб не отправлялось на сразу на сервер
    let maxKol = this.event.target.parentElement.children[3].value;
    let number = this.event.target.parentElement.children[1];
     
-   console.log("Максимальное кол-во книг ", maxKol);
+  // console.log("Максимальное кол-во книг ", maxKol);
     // При клике на плюс прибавляем значение в центральном счетчике товаров
     // Если превысило допустимое кол-во товаров, то оставляем число макс. кол-вом
-  //  let number = +event.target.parentElement.children[1].number;
-  //  +event.target.parentElement.children[3].value < number 
-
     +number.value >= +maxKol ? number.value = maxKol : number.value++;
-    console.log(`Счетчик товаров ${number.value}`)
+   // console.log(`Счетчик товаров ${number.value}`)
 }
 
 function changeCountMinus(event) {
     event.preventDefault(); // Чтоб не отправлялось на сразу на сервер
     let number = event.target.parentElement.children[1];
     
-
     // При клике на минус удаляем по одному значению в центральном счетчике товаров
     // Если <0 оставляем 0
     number.value <= 0 ? number.value = 0 : number.value--;
-    console.log(`Счетчик товаров ${number.value}`)
 }
 
-/*minus.onclick = (function (e) {
-    e.preventDefault(); // Чтоб не отправлялось на сразу на сервер
-    kol = document.querySelectorAll("hidden");
-    console.log("Кол-во книг ", kol);  
-});*/
+function changeCount(event) {
+    event.preventDefault(); // Чтоб не отправлялось на сразу на сервер
+    let maxKol = this.event.target.parentElement.children[3].value;
+    let number = this.event.target.parentElement.children[1];
+    console.log("Максимальное кол-во книг ", maxKol);
 
-/*btnPlusList.onclick = (function (e) {
-    e.preventDefault(); // Чтоб не отправлялось на сразу на сервер
-    kol = document.getElementsByClassName("hidden");
-    console.log("Кол-во книг ", kol.value);
-});*/
+    Math.sign(number.value) === -1 || Math.sign(number.value) === 0 ? number.value = 0 : number.value = number.value;
+    if (number.value > maxKol) { number.value = maxKol}
+}
 
-
-//btnPlusList.addEventListener('click', Plus.bind(btnPlusList, books));
-/*function Plus(e, books) {
-    e.preventDefault(); // Чтоб не отправлялось на сразу на сервер
-    kol = document.getElementsByClassName("hidden");
-    console.log("Кол-во книг ", kol.value);
-}*/
 
 
