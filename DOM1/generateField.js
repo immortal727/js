@@ -22,7 +22,6 @@ let Fields = {
 
 let section = document.querySelector(".GameField");
 
-const OBJARR = Object.entries(Fields);
 const BOTTON_ARR = document.getElementById('btn');
 
 BOTTON_ARR.addEventListener('click', generateField.bind(BOTTON_ARR, Fields));

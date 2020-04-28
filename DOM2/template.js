@@ -70,8 +70,7 @@ function generateTable(object) {
     
     for (i = 0; i < object.length; i++) {
         // ряд
-        let row = table.insertRow(i);
-        
+        let row = table.insertRow(i);  
         for (let item in object[i]) { // начинаем перебирать объект 
             let cell = row.insertCell();
             cell.innerText = object[i][item];

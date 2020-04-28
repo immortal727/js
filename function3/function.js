@@ -5,7 +5,7 @@ let arr = [
     [-90, 12, -12]
 ];
 
-// каждый элемент вложенного массива больше 0 ???
+// Каждый элемент вложенного массива больше 0 ???
 console.log(arr);
 let LessZero = (item, index, array) => {
     for (let i = 0; i < array[index].length; i++) {
