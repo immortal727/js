@@ -98,7 +98,7 @@ function changeCountPlus(event) {
 
 function changeCountMinus(event) {
     event.preventDefault(); // Чтоб не отправлялось на сразу на сервер
-    let number = event.target.parentElement.children[1];
+    let number = this.event.target.parentElement.children[1];
     
     // При клике на минус удаляем по одному значению в центральном счетчике товаров
     // Если <0 оставляем 0
@@ -111,8 +111,7 @@ function changeCount(event) {
     let number = this.event.target.parentElement.children[1];
     console.log("Максимальное кол-во книг ", maxKol);
 
-    Math.sign(number.value) === -1 || Math.sign(number.value) === 0 ? number.value = 0 : number.value = number.value;
-    if (number.value > maxKol) { number.value = maxKol}
+    number.value = parseInt(number.value) <= 0 ? 0 : parseInt(number.value) > parseInt(maxKol) ? maxKol : number.value;
 }
 
 
