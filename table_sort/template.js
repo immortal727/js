@@ -43,9 +43,11 @@ let goods = [
         count: 5
     }
 ];
+
+let tableArea = document.getElementById("blockProducts");
+let table = document.createElement("table");
 function generateTable(object) {
-    let tableArea = document.getElementById("blockProducts");
-    let table = document.createElement("table");
+
     table.classList.add("table_sort");
     // заголовок
     let caption = table.createCaption();
@@ -56,16 +58,15 @@ function generateTable(object) {
     for (let item in object) {
         counter++;
     }
-   
-    for (i = 0; i < object.length; i++) {
-        for (let item in Object.keys(object[i])) {
-            if (Object.keys(object[i])[i] != undefined) {
-                let th = document.createElement("th");
-                th.innerText = Object.keys(object[i])[i];
-                table.append(th);
-                break;
-            }  
-        }
+
+    let thead = table.createTHead();
+    //let thead = thead.insertRow(0);
+    row = thead.insertRow(0);
+    table.append(thead);
+    for (let item in object[0]) { // взять просто первый объект
+        let th = document.createElement("th");
+        th.innerText = item;
+        row.append(th);
     }
     
     for (i = 0; i < object.length; i++) {
@@ -83,5 +84,38 @@ function generateTable(object) {
 }
 
 generateTable(goods); // генерация таблицы с товарами
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Событие DOMContentLoaded происходит когда весь HTML был полностью загружен и пройден парсером
+    document.querySelectorAll('.table_sort thead').forEach(tableTH => tableTH.addEventListener('click', () => getSort(event)));
+
+    const getSort = ({ target }) => {
+        const order = (target.dataset.order = -(target.dataset.order || -1));
+        const index = [...target.parentNode.cells].indexOf(target);
+        console.log(index);
+        const collator = new Intl.Collator(['en', 'ru'], { numeric: true });
+        const comparator = (index, order) => (a, b) => order * collator.compare(
+            a.children[index].innerHTML,
+            b.children[index].innerHTML
+        );
+
+        for (const tBody of target.closest('table').tBodies)
+            tBody.append(...[...tBody.rows].sort(comparator(index, order)));
+
+        for (const cell of target.parentNode.cells)
+            cell.classList.toggle('sorted', cell === target);
+    };
+});
+
+/*document.getElementById("table_sort").onclick = function (event) {
+    let target = event.target || event.srcElement;
+    // Event.srcElement это проприетарный синоним стандартного свойства Event.target.
+    thArray = []; // создаем пустой массив
+    
+    if (target.tagName == "TH") {
+        alert(target.innerHTML);
+    }
+};*/
+
 
 

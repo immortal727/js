@@ -1,11 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\DOM2",
+    "\\lessonDom1\\css",
+    "\\lessonDom1\\js",
     "\\lessonDom2",
-    "\\lessonDom2\\js",
-    "\\Object",
-    "\\tovar"
+    "\\lessonDom2\\js"
   ],
-  "SelectedNode": "\\lessonDom2\\events-list.md",
+  "SelectedNode": "\\DOM2\\style.css",
   "PreviewInSolutionExplorer": false
 }
