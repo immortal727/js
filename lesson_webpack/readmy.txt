@@ -1,0 +1,35 @@
+При работе с webpack в начале нужно перейти в консоль
+Путь должен быть к текущей папке, в которой будем работать
+
+npm init -y формирование packed.json файла
+npm install webpack webpack-cli --save-dev
+
+/node_modules/ - в папке хранятся все загружаемые
+модули, необходиме проекту (библиотеки, плагины и т.д.)
+НИКОГДА НЕ ВЫКЛАДЫВАТЬ НА GUTHUB
+
+npm update - обновит все зависимости, перечисленные в package.json
+
+Для поддержки старых браузеров
+npm install babel-loader @babel/core @babel/preset-env --save-dev
+npm install @babel/runtime @babel/plugin-transform-runtime --save-dev
+
+npm install node-sass sass-loader --save-dev
+npm install mini-css-extract-plugin --save-dev
+npm install style-loader css-loader --save-dev
+npm install jquery --save
+
+main.html
+about.html
+src
+   main - для main.html
+       js 
+          book.js
+          index.js
+       css 
+   about - для about.html
+       js 
+          index.js
+       
+npm run build Запуск
+npm run start

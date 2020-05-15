@@ -3,16 +3,28 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>���������</title>
-    <meta name="description" " content="������� ������ ����" />
-    <link rel="stylesheet" href="style.css">
+    <title>Валидация формы</title>
+    <meta name="description" " content="Валидация" />
+    <!-- <link rel="stylesheet" href="style.css">-->
+    <!-- Так как файл validator.js не зависит от html,
+        то такие файлы можно подключать в head -->
+    <script src="validator.js"></script>
 </head>
 <body>
-    <form name="validate">
-        <input name="login" type="text"/>
-        <input name="password" type="" />
-
+    <!-- validator.js - Валидатор -->
+    <!-- index.js - использование валидатора для проверки формы auth-form-->
+    <form name="auth-form">
+        <div>
+            <input data-validate="login" name="login" type="text">
+            <span></span>
+        </div>
+        <div>
+            <input data-validate="password" name="password" type="password">
+            <span></span>
+        </div>
+        <input type="submit" value="Отправить">
     </form>
-    <script src="validator.js"></script>
+
+    <script src="index.js"></script>
 </body>
 </html>

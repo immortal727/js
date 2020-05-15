@@ -3,6 +3,6 @@
 let n = prompt("Введите число");
 n = parseInt(n);
 
-rec = n => n < 1 ? 0 : n + rec(Math.floor(-n));
+rec = n => n<1 ? 0 : n + rec(Math.floor(-n));
 // Math.floor - Округление до ближайшего меньшего целого
 rec();

@@ -1,12 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\DOM2",
-    "\\lessonDom1\\css",
-    "\\lessonDom1\\js",
-    "\\lessonDom2",
-    "\\lessonDom2\\js"
+    ""
   ],
-  "SelectedNode": "\\DOM2\\style.css",
+  "SelectedNode": "\\.gitignore",
   "PreviewInSolutionExplorer": false
 }

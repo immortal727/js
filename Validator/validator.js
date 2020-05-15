@@ -1,40 +1,100 @@
-class Validator {
-    static setFormAndSettings(form, setting) {
-        return new Validator(form, setting);
+п»їclass Validator {
+    // РІР°Р»РёРґР°С‚РѕСЂ РјРѕР¶РµС‚ РѕР±СЂР°Р±С‹С‚С‹РІР°С‚СЊ С‚РµРєСЃС‚РѕРІС‹Рµ РїРѕР»СЏ РЅР°:
+    // required / minLength / maxLength
+    _errors = 0;
+
+    _messages = {
+        minLength: "РњРёРЅРёРјСѓРј:",
+        maxLength: "РњР°РєСЃРёРјСѓРј:",
+        required: "РџРѕР»Рµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ"
+    };
+
+    constructor(form, rules) {
+        this._form = form;
+        this._settings = rules;
+    }
+    required(inputValue) {
+        return inputValue.length > 0;
+    }
+
+    minLength(inputValue, rule) {
+        return inputValue.length >= rule;
+    }
+
+    maxLength(inputValue, rule) {
+        return inputValue.length <= rule;
+    }
+
+    validateField(elem, elemRules) {
+        // elem - РїСЂРѕРІРµСЂСЏРµРјС‹Р№ СЌР»РµРјРµРЅС‚
+        // elemRules - РѕР±СЉРµРєС‚ СЃ РїСЂР°РІРёР»Р°РјРё РґР»СЏ РїСЂРѕРІРµСЂРєРё
+        // РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕРіРѕ РІРІРѕРґР°
+        for (let rule in elemRules) {
+            // РґР»СЏ login
+            // required / minLength / maxLength
+            if (!this[rule](elem.value, elemRules[rule])) {
+                // this.required() / this.minLength()
+                // this.maxLength()
+                elem.nextElementSibling.innerText =
+                    `${this._messages[rule]} ${elemRules[rule]}`;
+                this._errors += 1;
+                return;
+            }
+            if (this._errors > 0) this._errors -= 1;
+            elem.nextElementSibling.innerText =
+                "РџРѕР»Рµ Р·Р°РїРѕР»РЅРµРЅРѕ РІРµСЂРЅРѕ";
+        }
+    }
+    // РјРµС‚РѕРґ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РІС‹Р·РІР°РЅ, РїСЂРё СЃРѕР±С‹С‚РёРё submit
+    submitValidate(event) {
+        event.preventDefault();
+        for (let elem of this._form.elements) {
+            if (elem.dataset.validate) {
+                this.validateField(elem,
+                    this._settings[elem.dataset.validate]);
+            }
+        }
+        if (this._errors === 0) this._successFunc();
+        else this._errorFunc();
+    }
+    // РјРµС‚РѕРґ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РІС‹Р·РІР°РЅ, СЌР»РµРјРµРЅС‚!!! С‚РµСЂСЏРµС‚ С„РѕРєСѓСЃ
+    blurValidate(elem, elemRules) {
+        this.validateField(elem, elemRules);
+    }
+
+    initSubmit() {
+        this._form.addEventListener("submit",
+            this.submitValidate.bind(this));
+    }
+
+    initBlur() {
+        for (let elem of this._form.elements) {
+            if (elem.dataset.validate) {
+                elem.addEventListener("blur",
+                    this.blurValidate
+                        .bind(this, elem, this._settings[elem.dataset.validate]));
+            }
+        }
+    }
+
+    run() {
+        this.initBlur();
+        this.initSubmit();
+    }
+
+    setSuccess(successFunc) {
+        // СЃРѕР·РґР°РµС‚ СЃРІРѕР№СЃС‚РІРѕ _successFunc, СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ
+        this._successFunc = successFunc;
+        return this; // РІРѕР·РІСЂР°С‰Р°РµС‚ СЃСЃС‹Р»РєСѓ РЅР° С‚РµРєСѓС‰РёР№ РѕР±СЉРµРєС‚
+    }
+    setError(errorFunc) {
+        // СЃРѕР·РґР°РµС‚ СЃРІРѕР№СЃС‚РІРѕ _errorFunc, СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ
+        this._errorFunc = errorFunc;
+        return this; // РІРѕР·РІСЂР°С‰Р°РµС‚ СЃСЃС‹Р»РєСѓ РЅР° С‚РµРєСѓС‰РёР№ РѕР±СЉРµРєС‚
+    }
+
+    static setForm(form, rules) {
+        // СЃРѕР·РґР°РµС‚ РѕР±СЉРµРєС‚ Рё РІРѕР·РІСЂР°С‰Р°РµС‚ СЃСЃС‹Р»РєСѓ РЅР° СЌС‚РѕС‚ РѕР±СЉРµРєС‚
+        return new Validator(form, rules);
     }
 }
-
-// логин : от 3 до 7
-// пароль: от 5
-
-// при потере фокуса:
-// сразу проверять введегнные данные и сообщать об ошибке / успехе
-
-// при нажатии на кнопку type=submit:
-// в случае успешного заполншения - вызов success функции
-// в случве заполнения с ошибками - вызов error функции
-let submitSuccess = () => {
-    console.log("Даннные можно отправить на сервер")
-}
-let submitError = () => {
-    console.log("Даннные нельзя отправить на сервер")
-}
-let settings = {
-    login: { // значения атрибута name
-        rules: { // правила
-            requiered:true, // поле обязательно для заполнения
-            minLenghth: 3, // мин. длина
-            maxLenghth: 7 // макс. длина
-        }
-    },
-    password: { // password - значение атрибута name
-        rules: {
-            requiered: true,
-            minLenghth:5
-        }
-    }
-};
-Validator.setFormAndSettings(document.forms.validator.settings)
-    .setSubmitSuccess(submitSuccess)
-    .submitError(submitError)
-    .run();
